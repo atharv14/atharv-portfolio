@@ -1,0 +1,58 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "contain",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"title",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "aboard",
+							"type": "Text"
+						}
+					],
+					[
+						"time_period",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "beyond",
+							"type": "Text"
+						}
+					],
+					[
+						"institution",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "faster",
+							"type": "Text"
+						}
+					],
+					[
+						"description",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Consectetur exercitation minim anim aliqua laborum elit sit pariatur id eu quis voluptate. Commodo consectetur aliqua amet cupidatat. Consequat excepteur sit proident pariatur velit."
+									}
+								}
+							]
+						}
+					]
+				]
+			}
+		]
+	}
+]
