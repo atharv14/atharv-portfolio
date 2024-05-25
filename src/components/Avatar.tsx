@@ -5,7 +5,7 @@ import { PrismicNextImage } from "@prismicio/next";
 import clsx from "clsx";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-
+import usePrefersReducedMotion from "@/hooks/userPreferesReducedMotion";
 
 
 type AvatarProps = {
@@ -18,13 +18,14 @@ export default function Avatar({
     className
 }: AvatarProps) {
     const component = useRef(null);
+    const prefersReducedMotion = usePrefersReducedMotion();
 
     useEffect(() => {
         let ctx = gsap.context(() => {
             gsap.fromTo(
                 ".avatar",
                 { opacity: 0, scale: 1.4 },
-                { scale: 1, opacity: 1, duratrion: 1.3, ease: "power.inOut" }
+                { scale: 1, opacity: 1, duration: prefersReducedMotion ? 0 : 1.3, ease: "power3.inOut" }
             );
 
             window.onmousemove = (e) => {
@@ -32,35 +33,36 @@ export default function Avatar({
                 const componentRect = (component.current as HTMLElement).getBoundingClientRect()
                 const componentCenterX = componentRect.left + componentRect.width / 2
 
-                let componenetPercent = {
+                let componentPercent = {
                     x: (e.clientX - componentCenterX) / componentRect.width / 2
                 }
 
-                let distFromCenter = 1 - Math.abs(componenetPercent.x)
+                let distFromCenter = 1 - Math.abs(componentPercent.x)
 
                 gsap.timeline({
                     defaults: {
                         duration: .5,
-                        overwritw: "auto",
+                        overwrite: "auto",
                         ease: "power3.Out"
                     }
                 }).to(".avatar",
                     {
-                        rotation: gsap.utils.clamp(-2, 2, 5 * componenetPercent.x),
+                        rotation: gsap.utils.clamp(-2, 2, 5 * componentPercent.x),
                         duration: .5,
                     }, 0
 
-                ).to("highlight",
+                ).to(".highlight",
                     {
                         opacity: distFromCenter - 0.7,
-                        x: -10 + 20 & componenetPercent.x,
+                        x: -10 + 20 * componentPercent.x,
                         duration: .5
                     },
                     0
                 );
             };
         }, component);
-    }, []);
+        return () => ctx.revert();
+    }, [prefersReducedMotion]);
 
     return (
         <div ref={component} className={clsx("relative h-full w-full", className)}>

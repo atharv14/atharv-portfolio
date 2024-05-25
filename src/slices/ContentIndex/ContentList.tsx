@@ -10,9 +10,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 /** @type {import("@prismicio/client").Content.BlogPostDocument} */
+/** @type {import("@prismicio/client").Content.CertificatesDocument} */
 
 type ContentListProps = {
-    items: Content.BlogPostDocument[] | Content.ProjectDocument[];
+    items: Content.BlogPostDocument[] | Content.ProjectDocument[] | Content.CertificatesDocument[];
     contentType: Content.ContentIndexSlice["primary"]["content_type"];
     fallbackItemImage: Content.ContentIndexSlice["primary"]["fallback_item_image"];
     viewMoreText: Content.ContentIndexSlice["primary"]["view_more_text"];
@@ -34,7 +35,7 @@ export default function ContentList({
 
     const lastMousePos = useRef({ x: 0, y: 0 });
 
-    const urlPrefixes = contentType === "Blog" ? "/blog" : "/projects";
+    const urlPrefixes = contentType === "Blog" ? "/blog" : contentType === "Project" ? "/projects" : "/certificate";
 
     useEffect(() => {
         let ctx = gsap.context(() => {

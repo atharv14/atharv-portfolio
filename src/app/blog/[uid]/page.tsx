@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { createClient } from "@/prismicio";
-import ContentBody from "@/app/api/components/ContentBody";
+import ContentBody from "@/components/ContentBody";
 
 type Params = { uid: string };
 
@@ -11,9 +11,6 @@ export default async function Page({ params }: { params: Params }) {
     const page = await client
         .getByUID("blog_post", params.uid)
         .catch(() => notFound());
-
-    
-
     return (
         <ContentBody page={page}/>
     );

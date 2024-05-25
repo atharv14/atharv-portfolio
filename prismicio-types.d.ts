@@ -7,11 +7,11 @@ type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 type BlogPostDocumentDataSlicesSlice = ImageBlockSlice | TextBlockSlice;
 
 /**
- * Content for Blog Post documents
+ * Content for Blog documents
  */
 interface BlogPostDocumentData {
   /**
-   * Title field in *Blog Post*
+   * Title field in *Blog*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -22,7 +22,7 @@ interface BlogPostDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * Date field in *Blog Post*
+   * Date field in *Blog*
    *
    * - **Field Type**: Date
    * - **Placeholder**: *None*
@@ -33,7 +33,7 @@ interface BlogPostDocumentData {
   date: prismic.DateField;
 
   /**
-   * Hover Image field in *Blog Post*
+   * Hover Image field in *Blog*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -44,7 +44,7 @@ interface BlogPostDocumentData {
   hover_image: prismic.ImageField<never>;
 
   /**
-   * Slice Zone field in *Blog Post*
+   * Slice Zone field in *Blog*
    *
    * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
@@ -53,7 +53,7 @@ interface BlogPostDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
   slices: prismic.SliceZone<BlogPostDocumentDataSlicesSlice> /**
-   * Meta Title field in *Blog Post*
+   * Meta Title field in *Blog*
    *
    * - **Field Type**: Text
    * - **Placeholder**: A title of the page used for social media and search engines
@@ -64,7 +64,7 @@ interface BlogPostDocumentData {
   meta_title: prismic.KeyTextField;
 
   /**
-   * Meta Description field in *Blog Post*
+   * Meta Description field in *Blog*
    *
    * - **Field Type**: Text
    * - **Placeholder**: A brief summary of the page
@@ -75,7 +75,7 @@ interface BlogPostDocumentData {
   meta_description: prismic.KeyTextField;
 
   /**
-   * Meta Image field in *Blog Post*
+   * Meta Image field in *Blog*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -87,7 +87,7 @@ interface BlogPostDocumentData {
 }
 
 /**
- * Blog Post document from Prismic
+ * Blog document from Prismic
  *
  * - **API ID**: `blog_post`
  * - **Repeatable**: `true`
@@ -99,6 +99,104 @@ export type BlogPostDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<
     Simplify<BlogPostDocumentData>,
     "blog_post",
+    Lang
+  >;
+
+type CertificatesDocumentDataSlicesSlice = TextBlockSlice | ImageBlockSlice;
+
+/**
+ * Content for Certificates documents
+ */
+interface CertificatesDocumentData {
+  /**
+   * Title field in *Certificates*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certificates.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Date field in *Certificates*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certificates.date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  date: prismic.DateField;
+
+  /**
+   * Hover Image field in *Certificates*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certificates.hover_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  hover_image: prismic.ImageField<never>;
+
+  /**
+   * Slice Zone field in *Certificates*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certificates.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<CertificatesDocumentDataSlicesSlice> /**
+   * Meta Title field in *Certificates*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: certificates.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Certificates*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: certificates.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Certificates*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certificates.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Certificates document from Prismic
+ *
+ * - **API ID**: `certificates`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type CertificatesDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<CertificatesDocumentData>,
+    "certificates",
     Lang
   >;
 
@@ -486,6 +584,7 @@ export type SettingsDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | BlogPostDocument
+  | CertificatesDocument
   | HomepageDocument
   | PageDocument
   | ProjectDocument
@@ -598,7 +697,7 @@ export interface ContentIndexSliceDefaultPrimary {
    * - **API ID Path**: content_index.primary.content_type
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  content_type: prismic.SelectField<"Blog" | "Project">;
+  content_type: prismic.SelectField<"Blog" | "Project" | "Certificates">;
 
   /**
    * Description field in *ContentIndex → Primary*
@@ -951,6 +1050,26 @@ export interface TextBlockSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   text: prismic.RichTextField;
+
+  /**
+   * Button Text field in *TextBlock → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_block.primary.button_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_text: prismic.KeyTextField;
+
+  /**
+   * Button Link field in *TextBlock → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_block.primary.button_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button_link: prismic.LinkField;
 }
 
 /**
@@ -996,6 +1115,9 @@ declare module "@prismicio/client" {
       BlogPostDocument,
       BlogPostDocumentData,
       BlogPostDocumentDataSlicesSlice,
+      CertificatesDocument,
+      CertificatesDocumentData,
+      CertificatesDocumentDataSlicesSlice,
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,

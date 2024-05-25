@@ -1,5 +1,5 @@
-import Bounded from "@/app/api/components/Bounded";
-import Heading from "@/app/api/components/Heading";
+import Bounded from "@/components/Bounded";
+import Heading from "@/components/Heading";
 import { Content, isFilled } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import ContentList from "./ContentList";
@@ -17,8 +17,9 @@ const ContentIndex = async ({ slice, }: ContentIndexProps): Promise<JSX.Element>
   const client = createClient();
   const blogPosts = await client.getAllByType("blog_post");
   const projects = await client.getAllByType("project");
+  const certificates = await client.getAllByType("certificates");
 
-  const items = slice.primary.content_type === "Blog" ? blogPosts : projects;
+  const items = slice.primary.content_type === "Blog" ? blogPosts : slice.primary.content_type === "Project" ? projects : certificates;
 
   return (
     <Bounded

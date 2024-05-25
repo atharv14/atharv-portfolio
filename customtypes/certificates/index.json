@@ -1,7 +1,7 @@
 {
   "format": "page",
-  "id": "blog_post",
-  "label": "Blog",
+  "id": "certificates",
+  "label": "Certificates",
   "repeatable": true,
   "status": true,
   "json": {
@@ -39,10 +39,10 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "image_block": {
+            "text_block": {
               "type": "SharedSlice"
             },
-            "text_block": {
+            "image_block": {
               "type": "SharedSlice"
             }
           }

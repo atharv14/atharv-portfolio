@@ -1,9 +1,9 @@
-import Bounded from "@/app/api/components/Bounded";
-import Button from "@/app/api/components/Button";
-import Heading from "@/app/api/components/Heading";
+import Bounded from "@/components/Bounded";
+import Button from "@/components/Button";
+import Heading from "@/components/Heading";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import Avatar from "@/app/api/components/Avatar";
+import Avatar from "@/components/Avatar";
 
 /**
  * Props for `Biography`.
